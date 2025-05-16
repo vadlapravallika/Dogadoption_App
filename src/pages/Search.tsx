@@ -51,7 +51,6 @@ const Search = () => {
     }
   );
 
-  // Handle favorites toggle
   const toggleFavorite = useCallback((dogId: string) => {
     setFavorites(prev => 
       prev.includes(dogId) 
@@ -60,8 +59,7 @@ const Search = () => {
     );
   }, []);
 
-  // Generate a match
-  const generateMatch = useCallback(async () => {
+   const generateMatch = useCallback(async () => {
     if (favorites.length === 0) return;
     
     setIsGeneratingMatch(true);
@@ -77,17 +75,17 @@ const Search = () => {
     }
   }, [favorites]);
 
-  // Update search parameters
+
   const updateSearchParams = useCallback((newParams: Partial<SearchParams>) => {
     setSearchParams(prev => ({ ...prev, ...newParams }));
   }, []);
 
-  // Handle sort change
+  
   const handleSortChange = useCallback((sortOption: string) => {
     updateSearchParams({ sort: sortOption });
   }, [updateSearchParams]);
 
-  // Handle pagination
+  
   const goToNextPage = useCallback(() => {
     if (searchResults?.next) {
       const nextParams = new URLSearchParams(searchResults.next.split('?')[1]);
@@ -149,7 +147,7 @@ const Search = () => {
         </div>
       </div>
       
-      {/* Filter sidebar for larger screens, modal for mobile */}
+      {/* Filters and Dog Cards */}
       <div className="flex flex-col lg:flex-row gap-6 mb-6">
         {showFilters && (
           <div className="w-full lg:w-64 bg-white rounded-lg shadow-md p-4 mb-4 lg:mb-0 fade-in">
@@ -164,7 +162,7 @@ const Search = () => {
         )}
         
         <div className="flex-grow">
-          {/* Main content with dog cards */}
+          
           {isSearching || isLoadingDogs ? (
             <div className="flex flex-col items-center justify-center h-64">
               <div className="loading-spinner mb-4"></div>
