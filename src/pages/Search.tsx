@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { useState, useCallback } from 'react';
+import { useQuery } from 'react-query';
 import DogCard from '../components/DogCard';
 import Filters from '../components/Filters';
 import Pagination from '../components/Pagination';
 import FavoritesList from '../components/FavoritesList';
 import MatchModal from '../components/MatchModal';
-import { Heart, Search as SearchIcon, Filter, SlidersHorizontal } from 'lucide-react';
+import { Heart, Search as SearchIcon, Filter } from 'lucide-react';
 import { getBreeds, searchDogs, getDogs, getMatch, type Dog, type SearchParams } from '../services/api';
 
 const Search = () => {
@@ -19,7 +19,6 @@ const Search = () => {
   const [matchedDog, setMatchedDog] = useState<Dog | null>(null);
   const [isMatchModalOpen, setIsMatchModalOpen] = useState(false);
   const [isGeneratingMatch, setIsGeneratingMatch] = useState(false);
-  const queryClient = useQueryClient();
 
   // Query for breeds
   const { data: breeds = [] } = useQuery('breeds', getBreeds);
@@ -28,9 +27,7 @@ const Search = () => {
   const { 
     data: searchResults, 
     isLoading: isSearching,
-    isError: searchError,
-    refetch: refetchSearch
-  } = useQuery(
+    isError: searchError  } = useQuery(
     ['dogSearch', searchParams], 
     () => searchDogs(searchParams),
     { 
