@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { PawPrint, LogOut, User } from 'lucide-react';
+import { PawPrint, LogOut } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const { isAuthenticated, user, logout } = useAuth();
@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
           {isAuthenticated && user && (
             <div className="flex items-center">
               <div className="mr-4 hidden md:block">
-                <div className="text-sm text-gray-700">Welcome,</div>
+                <div className="text-sm text-gray-700">Welcome</div>
                 <div className="font-medium text-gray-900">{user.name}</div>
               </div>
               
